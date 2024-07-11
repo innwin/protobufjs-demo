@@ -1,0 +1,21 @@
+{
+  "name": "protobufjs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "protots": "pbjs -t static-module -w es6 -o generated/protobuf/proto.js protobuf/*.proto && pbts -o generated/protobuf/proto.d.ts generated/protobuf/proto.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "protobufjs": "^7.3.2"
+  },
+  "devDependencies": {
+    "protobufjs-cli": "^1.1.2"
+  },
+  "volta": {
+    "node": "20.15.1"
+  }
+}

@@ -1,0 +1,73 @@
+﻿syntax = "proto3";
+
+package CommonProto.Common;
+
+import "google/protobuf/wrappers.proto";
+
+// 指数通用类
+message OddsValues {
+
+	float home_odds = 1;			// 主队赔率(主队赢赔率)
+
+	float draw_odds = 2;			// 盘口(和局赔率)
+
+	float away_odds = 3;			// 客队赔率(客队赢赔率)
+
+	google.protobuf.FloatValue handicap = 4;				// 让球
+
+}
+
+message OddsMultiValues {
+
+	google.protobuf.FloatValue home_value_1 = 1;	//主 1-0 / 胜胜
+
+	google.protobuf.FloatValue home_value_2 = 2;	// 2-0	/ 胜平
+
+	google.protobuf.FloatValue home_value_3 = 3;	// 2-1	/ 胜负
+	
+	google.protobuf.FloatValue home_value_4 = 4;	// 3-0
+	
+	google.protobuf.FloatValue home_value_5 = 5;	// 3-1
+	
+	google.protobuf.FloatValue home_value_6 = 6;	// 3-2
+	
+	google.protobuf.FloatValue home_value_7 = 7;	// 4-0
+	
+	google.protobuf.FloatValue home_value_8 = 8;	// 4-1
+	
+	google.protobuf.FloatValue home_value_9 = 9;	// 4-2
+	
+	google.protobuf.FloatValue home_value_10 = 10;	// 4-3
+	
+	google.protobuf.FloatValue guest_value_1 = 11;	//客 顺序与主一样 /  负胜
+	
+	google.protobuf.FloatValue guest_value_2 = 12;					  // 负平
+	
+	google.protobuf.FloatValue guest_value_3 = 13;					  // 负负
+	
+	google.protobuf.FloatValue guest_value_4 = 14;
+	
+	google.protobuf.FloatValue guest_value_5 = 15;
+	
+	google.protobuf.FloatValue guest_value_6 = 16;
+	
+	google.protobuf.FloatValue guest_value_7 = 17;
+	
+	google.protobuf.FloatValue guest_value_8 = 18;
+	
+	google.protobuf.FloatValue guest_value_9 = 19;
+	
+	google.protobuf.FloatValue guest_value_10 = 20;
+	
+	google.protobuf.FloatValue draw_value_1 = 21;	//平局 0-0		/ 平胜
+	
+	google.protobuf.FloatValue draw_value_2 = 22;	//1-1			/ 平平
+	
+	google.protobuf.FloatValue draw_value_3 = 23;	//2-2			/ 平负
+	
+	google.protobuf.FloatValue draw_value_4 = 24;	//3-3
+	
+	google.protobuf.FloatValue draw_value_5 = 25;	//4-4
+	
+	google.protobuf.FloatValue other_value = 26;	//其他
+}

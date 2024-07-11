@@ -1,0 +1,71 @@
+﻿syntax = "proto3";
+
+package CommonProto.Odds;
+
+import "OddsValues.proto";
+
+//暂用于外文（足球/篮球）分析页--指数页面（参考英文goaloo）
+//一次把这个分析页--指数列表的数据生成
+message AnalysisOddsList {
+	repeated CompanyObj company_list = 1;
+	repeated PlayPanel panel_list = 2;			// 指数列表
+}
+
+//百家欧赔公司复杂，无法做成枚举,用于减少字符串，减少proto大小
+//可根据这个来做排序
+message CompanyObj{
+	int32 company_id=1;	
+	string company_name_cn = 2;
+	string company_name_en = 3;
+}
+message PlayPanel{
+
+	enum EnumListType{
+		Full=0;//全场
+		FirstHalf=1;//上半场
+		SecondHalf=2;//下半场
+	}
+
+	int32 odds_type=1;	//指数类型 CommonProto.Common.EnumFBOddsType
+
+	EnumListType list_type = 2;	
+
+	//采用增量更新机制，没对赔率公司进行排序
+	repeated OddsItem items=3;
+}
+
+message MultiOddsItem {
+	
+	int32 odds_id = 1;						// 指数Id---盘1的指数
+
+	int32 num=2;					//多盘的盘口号，不包含主盘
+
+	CommonProto.Common.OddsValues first_odds = 3;			//初盘
+
+	CommonProto.Common.OddsValues final_odds = 4;		//终盘-不含滚球，更新到开盘前
+
+	CommonProto.Common.OddsValues real_odds = 5;		//即时盘	包含滚球
+	
+	CommonProto.Common.OddsMultiValues first_multi_odds = 6;	//初盘（多值的赔率数据，波胆/半全场...）
+
+	CommonProto.Common.OddsMultiValues final_multi_odds = 7;	//终盘-不含滚球，更新到开盘前（多值的赔率数据，波胆/半全场...）
+
+	CommonProto.Common.OddsMultiValues real_multi_odds = 8;	//即时盘 包含滚球（多值的赔率数据，波胆/半全场...）
+}
+
+message OddsItem {
+	
+	int32 odds_id = 1;						// 指数Id---盘1（主盘）的指数
+
+	int32 company_id=2;					//公司名  从CompanyObj取公司名
+
+	CommonProto.Common.OddsValues first_odds = 3;			//初盘
+
+	CommonProto.Common.OddsValues final_odds = 4;		//终盘-不含滚球，更新到开盘前
+
+	CommonProto.Common.OddsValues real_odds = 5;		//即时盘	包含滚球
+
+	// 2021-8-3 (原结构已线上使用，故补丁式加入多盘结构)多盘数据(不含主盘) 盘2，盘3，盘4...
+	// 2023-5-17 OddsMultiValues类型的数据是新增的，主盘也在包含在里面；
+	repeated MultiOddsItem multi_items=6;
+}

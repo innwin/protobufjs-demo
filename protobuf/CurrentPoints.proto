@@ -1,0 +1,74 @@
+﻿syntax = "proto3";
+
+package CommonProto.Football.Analysis;
+
+message CurrentPoints {
+	
+	enum PointsKind
+	{
+		ALL = 0;		//  总
+		HOME = 1;		//  主
+		AWAY = 2;		//  客
+		NEAR = 3;		//  近
+	}
+
+	message Point {
+		
+		string name = 1;				// 全场
+
+		int32 total = 2;				// 赛
+
+		int32 win = 3;					// 胜
+
+		int32 draw = 4;					// 平
+
+		int32 loss = 5;					// 负
+
+		int32 get_goal = 6;				// 得
+
+		int32 loss_goal = 7;			// 失
+
+		int32 net_goal = 8;				// 净
+
+		int32 point = 9;				// 积分
+
+		int32 rank = 10;				// 排名
+
+		float win_scale = 11;			// 胜率
+
+		PointsKind points_kind = 12;	// 积分类型
+
+	}
+
+	message TeamPoints {
+		
+		int32 team_id = 1;				// 球队id
+
+		string team_name = 2;			// 球队名
+
+		int32 reduct_point = 3;			// 扣分
+
+		repeated Point points = 4;		// 积分列表
+
+		int32 sclass_id = 5;			// 联赛ID
+
+		string cur_season = 6;			// 赛季
+
+		int32 sclass_sub_id = 7;		// 子联赛ID
+
+		string team_name_short = 8;		//球队简称
+	}
+
+	TeamPoints home_points = 1;			// 主队积分
+
+	TeamPoints away_points = 2;			// 客队积分
+
+	TeamPoints half_home_points = 3;			// 半场主队积分
+
+	TeamPoints half_away_points = 4;			// 半场主队积分
+
+}
+
+
+
+
